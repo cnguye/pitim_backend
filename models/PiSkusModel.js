@@ -3,20 +3,18 @@ import db from "../config/Database.js";
 
 const { DataTypes } = Sequelize;
 
-const Users = db.define(
-    "users",
+const PiSkus = db.define(
+    "pi_tim_models",
     {
-        name: {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+        },
+        sku: {
             type: DataTypes.STRING,
         },
-        email: {
+        model: {
             type: DataTypes.STRING,
-        },
-        password: {
-            type: DataTypes.STRING,
-        },
-        refresh_token: {
-            type: DataTypes.TEXT,
         },
     },
     {
@@ -28,4 +26,4 @@ const Users = db.define(
     await db.sync();
 })();
 
-export default Users;
+export default PiSkus;
