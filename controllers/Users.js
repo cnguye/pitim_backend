@@ -52,19 +52,20 @@ export const getPiUserSettings = async (req, res) => {
 
 export const Register = async (req, res) => {
     const { name, email, password, confPassword } = req.body;
-    if (password !== confPassword)
+    if (password !== confPassword){
         return res.status(400).json({ msg: "Password and Confirm Password do not match" });
+    }
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
     try {
         await Users.create({
-            name: name,
+            username: name,
             email: email,
             password: hashPassword,
         });
         res.json({ msg: "Registration Successful" });
     } catch (error) {
-        console.log(error);
+        return res.status(400).json({msg: error.errors[0].message})
     }
 };
 
@@ -78,7 +79,7 @@ export const Login = async (req, res) => {
         const match = await bcrypt.compare(req.body.password, user[0].password);
         if (!match) return res.status(400).json({ msg: "Wrong Password" });
         const userId = user[0].id;
-        const name = user[0].name;
+        const name = user[0].username;
         const email = user[0].email;
         const accessToken = jwt.sign({ userId, name, email }, process.env.ACCESS_TOKEN_SECRET, {
             expiresIn: "15s",
