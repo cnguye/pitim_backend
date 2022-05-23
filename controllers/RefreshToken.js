@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 export const refreshToken = async(req, res) => {
     try {
         const refreshToken = req.cookies.refreshToken;
-        if(!refreshToken) return res.sendStatus(401);
+        if(!refreshToken) return res.status(200).send({refreshToken: false});
         const user = await Users.findAll({
             where:{
                 refresh_token: refreshToken
@@ -19,7 +19,7 @@ export const refreshToken = async(req, res) => {
             const accessToken = jwt.sign({userId, name, email}, process.env.ACCESS_TOKEN_SECRET,{
                 expiresIn: '15s'
             });
-            res.json({ accessToken });
+            res.json({ refreshToken: true, accessToken });
         });
     } catch (error) {
         console.log(error);
