@@ -1,10 +1,11 @@
 import express from "express";
-import { getPiSkus, getPiCurrencies, getPiUserSettings, getUsers, Register, Login, Logout } from "../controllers/Users.js";
+import { getExpressBackend, getPiSkus, getPiCurrencies, getPiUserSettings, getUsers, Register, Login, Logout } from "../controllers/Users.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
 
 const router = express.Router();
 
+router.get('/express_backend', getExpressBackend);
 router.get('/users', verifyToken, getUsers);
 router.get('/get_pi_skus', getPiSkus);
 router.get('/get_pi_currencies', getPiCurrencies);

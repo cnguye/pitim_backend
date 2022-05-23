@@ -6,6 +6,15 @@ import PiUserSettings from "../models/PiUserSettingsModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+export const getExpressBackend = async (req, res) => {
+    try {
+        res.set("Content-Type", "text/html");
+        res.send({ express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT FROM LHXXX2" });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getUsers = async (req, res) => {
     try {
         const users = await Users.findAll({
