@@ -50,8 +50,12 @@ export const getPiCurrencies = async (req, res) => {
 
 export const getPiUserSettings = async (req, res) => {
     try {
+        let userID = req.query.user_id;
         const piUserSettings = await PiUserSettings.findAll({
             attributes: ["user_id", "user_name", "user_settings"],
+            where: {
+                user_id: userID
+              }
         });
         res.json(piUserSettings);
     } catch (error) {
