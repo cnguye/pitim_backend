@@ -8,12 +8,14 @@ const PiUserSettings = db.define(
     {
         user_id: {
             type: DataTypes.INTEGER,
+            unique: true,
+            primaryKey: true
         },
         user_name: {
             type: DataTypes.STRING,
         },
         user_settings: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
         },
     },
     {
