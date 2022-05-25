@@ -7,7 +7,11 @@ import db from "./config/Database.js";
 import router from "./routes/index.js";
 const app = express();
 
-app.use(cors({ credentials:true, origin:`${process.env.SERVER_URL}` }));
+const URL = process.env.SERVER_URL === undefined ?
+    'http://localhost:3000'
+    : process.env.SERVER_URL;
+    
+app.use(cors({ credentials:true, origin:`${URL}` }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(router);
