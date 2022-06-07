@@ -15,17 +15,6 @@ export const getExpressBackend = async (req, res) => {
     }
 }
 
-export const getUsers = async (req, res) => {
-    try {
-        const users = await Users.findAll({
-            attributes: ["id", "name", "email"],
-        });
-        res.json(users);
-    } catch (error) {
-        console.log(error);
-    }
-};
-
 export const getPiSkus = async (req, res) => {
     try {
         const piSkus = await PiSkus.findAll({
@@ -58,6 +47,17 @@ export const getPiUserSettings = async (req, res) => {
               }
         });
         res.json(piUserSettings);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getGRecaptcha = async (req, res) => {
+    try {
+        const users = await Users.findAll({
+            attributes: ["id", "name", "email"],
+        });
+        res.json(users);
     } catch (error) {
         console.log(error);
     }
